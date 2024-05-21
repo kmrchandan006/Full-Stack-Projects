@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>University of Port Harcourt Teaching Hospital</title>
+    </head>
+    <body>
+        <header>
+            <h1>New Patient Registration Form</h1>
+            <h3>Please fill in the form below</h3>
+        </header>
+        <hr>
+        
+    <form>
+        <div>
+        <h4>Registation date and time</h4>
+            <input type="Date">
+            <input type="Time">
+            <label for="Time">Hour minutes</label>
+        </div>
+        
+        <div>
+            <h4>Health Care Number</h4>
+            <input type="number" required>
+        </div>
+        <hr>
+        
+        <div>
+          <h4>Patient Name</h4>
+          <label for="Name">Name:</label>
+          <input type="text" id="Name" name="name" required>
+        </div>
+        
+        <div>
+            <h4>Sex</h4>
+            <select>
+                <option>Please Select</option>
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+        </div>
+        
+        <div>
+            <h4>Date of Birth</h4>
+            <input type="Date">
+        </div>
+        
+        <div>
+            <h4>Phone Number</h4>
+            <input type="tel">
+        </div>
+        
+        <div>
+            <h4>Email</h4>
+            <input type="email" required>
+        </div>
+        
+        <div>
+            <h4>Address</h4>
+            <input type="text" required>
+        </div>
+        
+        <div>
+            <h4>Marital Status</h4>
+            <select>
+                <option>Please Select</option>
+                <option>Single</option>
+                <option>Married</option>
+                <option>Divorced</option>
+                <option>Complicated</option>
+            </select>
+        </div>
+        
+        <div>
+            <h4>Is the patient younger than 18?</h4>
+            <input type="radio" name="age">
+            <label>Yes</label><br />
+            <input type="radio" name="age">
+            <label>No</label>
+        </div>
+        
+        <div>
+            <h3>Health History</h3>
+            <hr>
+            <h4>Reasons for Registration</h4>
+            <input type="text">
+            <h4>Additional Information</h4>
+            <input type="text">
+        </div>
+        
+        <div>
+            <h4>Taking any medications currently?</h4>
+            <input type="radio" name="medications">
+            <label>Yes</label><br />
+            <input type="radio" name="medications">
+            <label>No</label>
+        </div>
+        
+        <div>
+            <h4>Please list them here</h4>
+            <input type="text">
+        </div>
+        
+        <div>
+            <h3>Insurance Information</h3>
+            <hr>
+            <h4>Insurance Company</h4>
+            <input type="text">
+            <h4>Insurance ID</h4>
+            <input type="number">
+            <h4>Place Holder's Name</h4>
+            <input type="text">
+            <h4>Date of Birth</h4>
+            <input type="Date">
+        </div>
+        
+        <br />
+        
+        <button type="submit">Register</button>
+    </form>
+    </body>
+</html>
