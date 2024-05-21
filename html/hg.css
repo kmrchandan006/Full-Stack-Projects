@@ -1,0 +1,55 @@
+/* Style the body element */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Style the header element */
+  .header {
+    background-color: #1abc9c;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Style the navbar element */
+  .navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #333;
+  }
+  
+  /* Style the navbar links */
+  .navbar a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  /* Style the section element */
+  .section {
+    padding: 20px;
+  }
+  
+  /* Style the footer element */
+  .footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  /* Use media queries to make the website responsive */
+  @media (max-width: 768px) {
+    /* Stack the navbar links vertically on small screens */
+    .navbar {
+      flex-direction: column;
+      height: auto;
+    }
+  
+    /* Adjust the padding of the section element on small screens */
+    .section {
+      padding:10px;
+  }
+}

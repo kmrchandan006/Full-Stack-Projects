@@ -1,0 +1,46 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/@pdf-lib/pdf-lib@1.14.0/umd/PDFLib.js"></script>
+  <title>PDF Editor</title>
+  <link rel="stylesheet" href="pdf.css">
+</head>
+<body>
+
+  <input type="file" id="pdfFileInput" accept=".pdf">
+  <button onclick="editPDF()">Edit PDF</button>
+
+  <script>
+    async function editPDF() {
+      const pdfFileInput = document.getElementById('pdfFileInput');
+      const file = pdfFileInput.files[0];
+
+      if (file) {
+        const pdfBytes = await file.arrayBuffer();
+        const pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
+
+        const page = pdfDoc.getPages()[0];
+        const { width, height } = page.getSize();
+        const font = await pdfDoc.embedFont(PDFLib.Font.Helvetica);
+
+        const text = 'Hello, PDF!';
+
+        page.drawText(text, { x: 50, y: height - 200, font });
+
+        const modifiedPDFBytes = await pdfDoc.save();
+
+        const blob = new Blob([modifiedPDFBytes], { type: 'application/pdf' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'edited.pdf';
+        link.click();
+      } else {
+        alert('Please choose a PDF file.');
+      }
+    }
+  </script>
+<script src="pdf.js"></script>
+</body>
+</html>

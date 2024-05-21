@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Editor</title>
+    <link rel="stylesheet" href="path/to/pdfjs/web/viewer.css">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #viewer {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="viewer"></div>
+
+    <script src="path/to/pdfjs/build/pdf.js"></script>
+    <script>
+        // Load and display PDF using PDF.js
+        pdfjsLib.getDocument('path/to/your/file.pdf').then(function(pdfDoc) {
+            var numPages = pdfDoc.numPages;
+            var pdfViewer = document.getElementById('viewer');
+
+            function renderPage(pageNumber) {
+                pdfDoc.getPage(pageNumber).then(function(page) {
+                    var viewport = page.getViewport({ scale: 1.5 });
+                    var canvas = document.createElement('canvas');
+                    var context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+
+                    pdfViewer.appendChild(canvas);
+
+                    page.render({
+                        canvasContext: context,
+                        viewport: viewport
+                    });
+                });
+            }
+
+            for (var i = 1; i <= numPages; i++) {
+                renderPage(i);
+            }
+        });
+    </script>
+</body>
+</html>
