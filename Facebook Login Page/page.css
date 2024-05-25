@@ -1,0 +1,30 @@
+body {
+    background-color: #01f;
+    text-align: justify;
+  }
+  .lala {
+    position: absolute;
+    top: 210px;
+    left: 70px;
+    text-align: justify;
+  }
+  #saha {
+    position: absolute;
+    top: 90px;
+    left: 100px;
+    font-size: 210%;
+    width: 60px;
+    color: white;
+    font-family:sans-serif;
+    text-decoration:underline;
+  }
+  #huhu {
+      position: absolute;
+    top: 410px;
+    left: 140px;
+    font-size: 130%;
+    width: 100px;
+    color: white;
+    background-color: darkblue;
+    border-color:white;
+  }
