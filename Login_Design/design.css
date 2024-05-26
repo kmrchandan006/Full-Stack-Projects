@@ -1,0 +1,114 @@
+/* Add all your styles here */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box ;
+  }
+  
+  body {
+      font-size: 15pt;
+      background-color: #1e2328;
+  }
+  
+  .login_page {
+    margin-top: 50px ;
+    margin: 0 auto;
+    border: 1px solid black;
+    max-width: 400px ;
+    height: 500px;
+    background: url('https://images.unsplash.com/photo-1714517615056-e8d12c09b3bd?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.75);
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+  }
+  
+  form {
+    display: block ;
+    padding: 40px;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: brightness(40%);
+    display: flex ;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  h1 {
+    font-weight: normal;
+    font-size: 24px;
+    text-shadow: 0 0 2px rgba(0,0,0,0.5);
+    margin-bottom: 50px;
+  }
+  
+  label {
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase ;
+    font-size: 10px;
+    letter-spacing: 10px;
+    padding-top: 10p ;
+  }
+  
+  input {
+    background: rgba(255,255,255,0.5);
+    height: 40px;
+    line-height: 40px;
+    border-radius: 20px;
+    padding: 0 20px;
+    border: none;
+    margin-bottom: 20px;
+    color: #ffffff;
+  }
+  
+  button {
+    background: orangered;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 40px;
+    border: none;
+    margin: 10px 0 ;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    color: white;
+    font-size: 12px;
+    text-transform: uppercase ;
+  }
+  
+  input:focus {
+    outline: none;
+    border: none;
+    box-shadow: 0 0 5px orangered;
+  }
+  
+  p {
+      text-align: center;
+      color: orangered;
+  }
+  
+  
+  @media screen and (max-width: 600px) {
+    .login_page {
+      max-width: 100%;
+      padding: 10px;
+      border-radius: none;
+    }
+    
+    form {
+      border-radius: 20px;
+    }
+    
+    .login_page h1 {
+      font-size: 24px;
+    }
+    
+    .login_page input[type="text"],
+    .login_page input[type="password"],
+    .login_page button {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+  
+  
+  

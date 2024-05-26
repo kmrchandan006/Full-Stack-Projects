@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page Title</title>
+        <link rel="stylesheet" href="design.css">
+    </head>
+    <body>
+
+<div class="login_page">
+  <form action="" onsubmit="submitForm(event)">
+    <h1>Login</h1>
+
+    <label for="email">Email</label>
+    <input type="text" id="email" required>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" required>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<p>© 2024 </p>
+
+
+<script>
+    function submitForm(event) {
+  event.preventDefault(); 
+
+  let emailInput = document.getElementById("email");
+  let email = emailInput.value;
+
+  
+  let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (emailPattern.test(email)) {
+    alert("Your account details are successfully submitted.");
+    
+  } else {
+    alert("Invalid email. Please enter a valid email address.");
+  }
+}
+</script>
+
+    </body>
+</html>
