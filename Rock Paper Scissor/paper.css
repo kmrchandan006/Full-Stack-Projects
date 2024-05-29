@@ -1,0 +1,49 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  
+  body {
+    background-color: lightgray;
+  }
+  .choice-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    font-size: 4rem;
+    margin-top: 7rem;
+    padding: 4rem;
+  
+  }
+  
+  .choice {
+    border-radius: 50%;
+    object-fit: cover;
+    padding: 9px;
+  }
+  .choice:hover {
+    border: 1px solid #fff;
+  
+  }
+  
+  .score-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.7rem;
+    margin-top: 20px;
+    padding: 12px 0px;
+    font-size: 25px;
+  }
+  
+  .mgs-container {}
+  .mgs {
+    margin: 12px;
+    padding: 12px;
+    border-radius: 0.8rem;
+    display: inline-block;
+    background-color: #000;
+    color: #fff;
+  }

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page Title</title>
+  <link rel="stylesheet" href="paper.css">
+</head>
+<body>
+  <h1>Rock-paper-scissor</h1>
+  <!-- user choice -->
+  <div class="choice-container ">
+    <div class="choice">
+      <span id="rock">&#x270A;</span>
+    </div>
+    <div class="choice">
+      <span id="paper">&#x1F590;</span>
+    </div>
+    <div class="choice">
+      <span id="scissor">&#x270C;</span>
+    </div>
+  </div>
+
+  <!-- counting score  -->
+  <div class="score-container">
+    <div class="score">
+      <p class="user-score">
+        0
+      </p>
+      <p>
+        your score
+      </p>
+    </div>
+    <div class="score">
+      <p class="comp-score">
+        0
+      </p>
+      <p>
+        comp score
+      </p>
+    </div>
+  </div>
+
+  <div class="mgs-container">
+    <p class="mgs">
+      play your move!
+    </p>
+  </div>
+<script>
+let userScore = 0;
+let compScore = 0;
+
+const choices = document.querySelectorAll(".choice");
+
+const genCompChoice = () => {
+  const options = ["rock",
+    "paper",
+    "scissor"];
+  const randIdx = Math.floor(Math.random()*3);
+  return options[randIdx]
+}
+
+
+const showWinner = (userWin) => {
+  if (userWin) {
+    userScore++;
+    document.querySelector(".user-score").innerText = userScore;
+    document.querySelector(".mgs").innerText = "you won!";
+    document.querySelector(".mgs").style.backgroundColor = "green"
+  } else {
+    compScore++;
+    document.querySelector(".comp-score").innerText = compScore;
+    document.querySelector(".mgs").innerText = "you loss!, play again";
+    document.querySelector(".mgs").style.backgroundColor = "red"
+  }
+
+}
+
+const playGame = (userChoice) => {
+  const compChoice = genCompChoice();
+
+  if (userChoice === compChoice) {
+    document.querySelector(".mgs").innerText = "Game was draw!, play again";
+    document.querySelector(".mgs").style.backgroundColor = "#000"
+    console.log("draw game");
+  } else {
+    let userWin = true;
+    if (userChoice === "rock") {
+      if (compChoice === "paper") {
+        userWin = false;
+      } else {
+        userWin = true;
+      }
+    } else if (userChoice === "paper") {
+      if (compChoice === "scissor") {
+        userWin = false;
+      } else {
+        userWin = true;
+      }
+    } else {
+      if (compChoice === "rock") {
+        userWin = false;
+      } else {
+        userWin = true;
+      }
+    }
+
+    showWinner(userWin);
+  }
+
+}
+
+choices.forEach((choice) => {
+  const userChoice = choice.getAttribute("id");
+  //console.log("id =",userChoice)
+  choice.addEventListener("click", () => {
+    playGame(userChoice);
+
+  })
+})
+</script>
+</body>
+</html>
