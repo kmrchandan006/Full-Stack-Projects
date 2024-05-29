@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  background-color: #413e51;
+  color: #fff;
+}
+
+.smartwatch {
+  position: relative;
+  height: 450px;
+  width: 250px;
+}
+
+.top_straps,
+.bottom_straps {
+  background-color: #55c8ff;
+  width: 150px;
+  height: 90px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.top_straps {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.bottom_straps {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.screen {
+  position: relative;
+  height: 260px;
+  width: 240px;
+  margin-left: auto;
+  margin-right: auto;
+  border: solid 10px #191f3f;
+  background-color: #000000;
+  border-radius: 40px;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.inner_screen {
+  height: 100%;
+  background-color: #000000;
+  border: solid 5px #191f3f;
+  border-radius: 30px;
+}
+
+.screen_components {
+  transition: opacity 0.8s;
+}
+
+.top_reflection {
+  position: absolute;
+  background-color: #ffffff7a;
+  height: 20px;
+  width: 90%;
+  top: 0;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.button {
+  position: absolute;
+  background-color: #000000;
+  width: 5px;
+  height: 30px;
+  outline: solid 5px #191f3f;
+  top: 150px;
+  right: 0;
+  cursor: pointer;
+}
+
+.date_battery__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 10px 20px;
+  font-size: 12px;
+}
+
+.battery_bluetooth {
+  font-size: 16px;
+
+}
+
+.ri-battery-fill {
+  color: #00cf45;
+}
+
+.ri-bluetooth-connect-line {
+  color: rgb(0, 110, 255);
+}
+
+.clock {
+  font-size: 66px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.status {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.steps,
+.heartbeat,
+.clariesBurn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.ri-footprint-fill {
+  color: rgb(0, 183, 255);
+}
+
+.ri-heart-fill {
+  color: rgb(219, 0, 0);
+}
+
+.ri-fire-fill {
+  color: rgb(255, 187, 0);
+}
+
+.turnOffScreen {
+  opacity: 0;
+}
