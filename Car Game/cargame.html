@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page Title</title>
+        <script>
+            window.onload = () => {
+            var start = document.getElementById("start");
+            const right = document.getElementById("right");
+            const left = document.getElementById("left");
+    var arr_img = ["https://i.imgur.com/MygWzNw.jpeg ","https://i.imgur.com/jUWx0bD.jpeg", "https://i.imgur.com/Ejer03H.jpeg", "https://i.imgur.com/ai6kqc0.jpeg"];
+start.onclick = () => {
+const score = document.getElementById("score");
+start.textContent = "Re-start";
+start.style.visibility = "hidden";
+right.style.visibility = "visible";
+left.style.visibility = "visible";
+    var hearts = 3;
+    const heart = document.getElementById("heart");
+    const canvas = document.getElementById("canvas");
+    canvas.height = innerHeight;
+    canvas.width = innerWidth;
+    const ctx = canvas.getContext("2d");
+    var x = canvas.width/2;
+    var y = canvas.height/2;
+    right.style.width = canvas.width/3+"px";
+    right.style.height = canvas.width/3+"px";
+    
+    left.style.width = canvas.width/3-10+"px";
+    left.style.height = canvas.width/3+"px";
+    var s_value = 0;
+    
+    function showScore(){
+        score.textContent = "Score: "+ s_value;
+    }
+    showScore();
+    const left_arr = [23, canvas.width/3 + 25, 2*(canvas.width/3) + 27];
+    var obstacles = [];
+    var scores = [];
+    function obs(){
+        obstacles.push({
+            ox : left_arr[Math.floor(Math.random() * 3)],
+            oy : -400,
+            collided : false,
+            o_img : arr_img[Math.floor(Math.random()*4)]
+        })
+    }
+    var obs_interval = setInterval(obs, 800);
+    
+    function sc(){
+        scores.push({
+            sx: left_arr[Math.floor(Math.random()* 3)],
+            sy: - 400,
+            collided : false
+        })
+    }
+    setInterval(sc, 100);
+    
+    function Draw(){
+        start.style.visibility = "hidden";
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Draw player
+        var car_img = new Image();
+        car_img.src = "https://i.imgur.com/6wjbxLq.jpeg";
+        ctx.drawImage(car_img, x - 50, y + 100, 100, 100);
+        
+        // Draw lines
+        ctx.beginPath();
+        ctx.strokeStyle = "#000";
+        ctx.moveTo(canvas.width/3 - 10, 0);
+        ctx.lineTo(canvas.width/3 - 10, canvas.height);
+        ctx.moveTo(2*(canvas.width/3), 0);
+        ctx.lineTo(2*(canvas.width/3), canvas.height)
+        ctx.stroke();
+        ctx.closePath();
+        
+        
+        left.onclick = () => {
+            if(x > canvas.width/3)
+                moveCar(-canvas.width/3);
+        }
+        right.onclick = () => {
+            if(x < (canvas.width/3)*2){
+                moveCar(canvas.width/3);
+            }
+        }
+        
+        
+        
+        for(let k = 0; k < scores.length; k++){
+    var sco = scores[k];
+    ctx.beginPath();
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 2; 
+    ctx.arc(sco.sx + 50, sco.sy, 15, 0, Math.PI * 2); 
+    ctx.stroke();
+    if(hearts != 0){
+        sco.sy += 7;
+    }
+    else{
+        start.style.visibility = "visible";
+    }
+    ctx.closePath();
+    
+    if(x - 50 < sco.sx + 50 + 15 && 
+       x + 50 > sco.sx + 50 - 15 && 
+       y + 100 < sco.sy + 15 && 
+       y + 200 > sco.sy && 
+       !(sco.collided)){
+       scores.splice(k, 1);
+       k--;
+        sco.collided = true;
+        s_value+=2;
+        showScore();
+    }
+    if(sco.sy > canvas.height){
+        scores.splice(k, 1);
+        k--;
+    }
+}
+
+        for(let i = 0; i < obstacles.length; i++)
+        {
+         var obstacle = obstacles[i];
+          var obs_img = new Image();
+           obs_img.src = obstacle.o_img;
+             ctx.drawImage(obs_img , obstacle.ox, obstacle.oy, canvas.width/3 -55 , canvas.width/3-55);
+              if(hearts != 0)
+              { obstacle.oy += 7; 
+              } 
+              
+              if(x - 50 < obstacle.ox + (canvas.width / 3 - 55) && x + 50 > obstacle.ox && y + 150 < obstacle.oy + (canvas.width / 3 - 55) && y + 200 > obstacle.oy && !(obstacle.collided))
+              
+              {
+               hearts-=1; drawHeart(hearts);
+                obstacle.collided = true; 
+                
+               obstacles.splice(i, 1);
+                 i--; 
+               } 
+               if(obstacle.oy > canvas.height){
+                obstacles.splice(i, 1);
+                 i--; 
+               }
+    }
+    }
+    
+    function Animate(){
+        Draw();
+        requestAnimationFrame(Animate);
+    }
+    
+    Animate();
+    
+    function moveCar(dx) {
+        const frames = 30;
+        const duration = 50;
+        const stepX = dx / frames;
+        
+        let frame = 0;
+        const moveInterval = setInterval(() => {
+            x += stepX;
+            frame++;
+            if (frame >= frames) {
+                clearInterval(moveInterval);
+            }
+        }, duration / frames);
+    }
+    
+    function drawHeart(h){
+        heart.textContent = "Life: ";
+        for(var j = 0;j < h;j++){
+            heart.textContent += "❤️";
+        }
+    }
+    drawHeart(3);
+    }
+    }
+        </script>
+        <style>
+            body {
+    display:flex;
+    margin:0;
+    padding:0;
+    overflow:hidden;
+}
+#canvas{
+    position:absolute;
+    background-color:#fff;
+    z-index:0;
+}
+#left{
+    left:0px;
+    border-radius:10%;
+    border-top-right-radius:50%;
+}
+#right, #left{
+    z-index:1;
+    position:absolute;
+    bottom:0px;
+    visibility:hidden;
+}
+#right{
+    right:0px;
+    border-radius:10%;
+    border-top-left-radius:50%;
+}
+#heart{
+    z-index:1;
+    position:absolute;
+    font-size:18px;
+    left:5px;
+    top:5px;
+}
+#score{
+    z-index:1;
+    position:absolute;
+    font-size:20px;
+    right:15px;
+    top:2px;
+}
+#start{
+    z-index:1;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+}
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas"></canvas>
+        <button id="left"></button>
+        <button id="right"></button>
+        <div id="heart"></div>
+        <div id="score"></div>
+        <button id="start">Start</button>
+    </body>
+</html>
