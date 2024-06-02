@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="Quiz.css">
+    <title>Page Title</title>
+    <style>
+        body{
+    display:flex;
+    //overflow:hidden;
+    margin:0;
+    padding:0;
+    background-color:#000;
+}
+/*#lang_opt{
+    
+}*/
+.innerlang{
+    height:42px;width:192px;background-color:#000;position:relative;left:4px;
+    top:4px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+#certificate{
+    position:absolute;
+    top:100px;
+    left:10px;
+    //transform:translate(-50%,-50%);
+    width:400px;
+    height:300px;
+    border:3px solid #fff;
+}
+#next{
+    position:absolute;
+    top:450px;
+    left:300px;
+    height:55px;
+    width:100px;
+}
+#prev{
+    position:absolute;
+    top:450px;
+    left:20px;
+    height:55px;
+    width:100px;
+}
+#prev, #next{
+    background-color:#000;
+    color:#fff;
+    font-size:20px;
+}
+#chk{
+    height:60px;
+    width:200px;
+    position:absolute;
+    justify-content:center;
+    align-items:center;
+    top:430px;
+    left:120px;
+    background-color:#000;
+    color:#fff;
+    outline:none;
+    font-size:20px;
+}
+#round_no{
+    color:#fff;
+    font-size:30px;
+    position:absolute;
+    top:500px;
+    text-align:center;
+    justify-content:center;
+    left:120px;
+}
+#back{
+    background-color:#fff;
+    height:50px;width:50px;
+    position:absolute;
+    left:5px;top:5px;
+}
+.lang{
+    position:absolute;
+    color:#fff;
+    height:50px;
+    width:200px;
+    background-color:#666;
+    left:50%;
+    transform:translate(-50%,-50%);
+    margin-top:100px;
+    text-align:center;
+    font-size:30px;
+    vertical-align:middle;
+    filter:blur(.5px);
+   background:-webkit-linear-gradient(45deg,#c00,#0f0,#00f,#f00,#0c0);
+    animation:colorchange 7s linear infinite ;
+}
+@keyframes colorchange{
+    0%{
+    background-position: 0 0;
+    }
+      50%{
+      background-position:200px 0;
+         
+          
+      }
+      100%{
+             background-position:400px 0;
+      }
+}
+.quiz,.q{
+    color:#fff;
+    font-size:25px;
+    top:80px;
+    position:absolute;
+    left:10px;
+}
+.label{
+    height:40px;
+    width:360px;
+    background-color:#555;
+    position:absolute;
+    text-align:center;
+    vertical-align:center;
+    padding-top:8px;
+    font-size:23px;
+    border-top:5px solid #222;
+    border-bottom:5px solid #222;
+    left:25px;
+    z-index:0;
+}
+.option{
+    position:absolute;
+    transform:scale(1.25);
+    z-index:1;
+    left:30px;
+}
+#submit{
+    position:absolute;
+    left:50px;
+    height:50px;
+    width:300px;
+}
+    </style>
+</head>
+<body>
+
+
+<div id="certificate" style="text-align:center;color:#fff;">
+        <div class="language" style="font-size:50px"></div>
+            <h1 style="letter-spacing:3px;">Certificate</h1><h3>of Participation</h3><br>
+            <div style="font-size:20px;">This is the certificate of participation in <span class="language"></span> Quiz.<br> You have scored <span id="score"></span> /15 in <span class="language"></span> Quiz.</div>
+        </div>
+        
+        
+<div id="lang_opt">
+    <div class="lang" style="top:0px;" onclick="html(); subject = html; arr = htmlquiz;"><div class="innerlang">HTML</div></div><br>
+    <div id="css" class="lang" style="top:80px" onclick="css(); subject = css; arr = cssquiz;"><div class="innerlang">CSS</div></div><br>
+    <div id="js" class="lang" style="top:160px" onclick="js(); subject = js; arr = jsquiz;"><div class="innerlang">JS</div></div>
+    <div id="cpp" class ="lang" style="top:240px" onclick="cpp(); subject=cpp; arr = cppquiz;"><div class="innerlang">C++</div></div>
+    <div id="java" class="lang" style="top:320px" onclick="java(); subject = java; arr=javaquiz;"><div class="innerlang">JAVA</div></div>
+    <div id="csharp" class="lang" style="top:400px;" onclick="csharp(); subject = csharp; arr=csharpquiz;"><div class="innerlang">C#</div></div>
+    <div id="python" class="lang" style="top:480px;" onclick="python(); subject = python; arr = pythonquiz;"><div class="innerlang">PYTHON</div></div>
+</div>
+<img src="https://i.imgur.com/F7l0Imi.jpeg" id="homeImage">
+<span id="round_no">Round : <span id="round"> 1</span>/15</span>
+<img src="https://i.imgur.com/Qj9Rc0V.png" id="back">
+<script>
+    //window.onload = () => {
+    alert("Each language has 15 mcqs.Select your language and start quiz.")
+    var lang;
+    var next = document.createElement("button");
+    var prev = document.createElement("button");
+    document.body.appendChild(next);
+    document.body.appendChild(prev);
+    next.setAttribute("id","next");
+    prev.setAttribute("id","prev");
+    next.innerHTML = "Next";
+    prev.innerHTML = "Prev";
+    next.style.visibility = "hidden";
+    prev.style.visibility = "hidden";
+    var check_ans = document.createElement("button");
+    check_ans.setAttribute("id","chk");
+    check_ans.setAttribute("align","center")
+    check_ans.style.visibility = "hidden";
+    var arr;
+    var home = document.getElementById("homeImage");
+    var round_no = document.getElementById("round_no");
+    
+    var back = document.getElementById("back");
+    back.style.visibility = "hidden";
+//document.body.appendChild(home);
+home.style.visibility = "hidden";
+//home.innerHTML = `<img src="https://i.imgur.com/F7l0Imi.jpeg">`;
+home.style.height = "50px";
+home.style.width = "50px";
+home.style.position = "absolute";
+home.style.left = "5px";
+home.style.top = "5px";
+home.style.backgroundSize = "cover";
+var certificate = document.getElementById("certificate");
+certificate.style.display = "none";
+round_no.style.visibility = "hidden";
+//var check = false;
+back.onclick = () => {
+c = 0;
+    back.style.visibility = "hidden";
+    var q = document.querySelectorAll(".q");
+    q.forEach(function(e){
+        e.remove();
+    });
+    var del_label= document.querySelectorAll(".label");
+       del_label.forEach(function(el){
+           el.remove();
+       });
+       var del_option = document.querySelectorAll(".option");
+       del_option.forEach(function(ele){
+           ele.remove();
+       });
+       check_ans.style.visibility = "visible";
+       certificate.style.visibility = "visible";
+       home.style.visibility = "visible";
+       next.style.visibility = "hidden";
+       prev.style.visibility = "hidden";
+}
+home.onclick = () => {
+score = 0;
+round_no.style.visibility = "hidden";
+check_ans.style.visibility = "hidden";
+            certificate.style.display = "none";
+            document.getElementById("lang_opt").style.display = "block";
+            quiz.remove();
+            submit.style.visibility = "hidden";
+        var label_rem = document.querySelectorAll(".label");
+        label_rem.forEach(function(e){
+            e.remove();
+        });
+        var option_rem = document.querySelectorAll(".option");
+        option_rem.forEach(function(elem){
+            elem.remove();
+        });
+        current = 0;
+        home.style.visibility = "hidden";
+}
+const htmlquiz = [
+        {
+        question: "Q1, Html is case:",
+        options: ["Sensitive", "Insensitive"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q2, Select block level element among the following:",
+        options: ["<span>", "<img>", "<a>", "<p>"],
+        correctAnswerIndex: 3
+    },
+    {
+        question: "Q3, Which of the following hex code for color is incorrect?",
+        options: ["#0ABCD0", "#00FF00", "#00RED0", "#FEDA55"],
+        correctAnswerIndex: 2
+    },
+    {
+        question: "Q4, Which of the following is used for multi-lines text input?",
+        options: [`<input type="textarea">`, "<textarea>", "<input>", "none of them"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q5, Which of the following is used to create a radio button?",
+        options: [`<input type="radio">`, "<radio>", "<textarea>", "<input radio>"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q6, Which of the following is not a semantic tag?",
+        options: ["<header>","<div>","<article>","<textarea>"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q7, Who is the father of HTML?",
+        options: ["Rasmus Lerdorf","Tim Berners-Lee","Brendan Eich","Sergey Brin"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q8, In which part of the HTML metadata is contained?",
+        options: ["<body>","<div>","<head>","<script>"],
+        correctAnswerIndex: 2
+    },
+    {
+        question: "Q9, Which of the following tag defines the superscript text?",
+        options: ["<super>","<s>","<sup>","<superscript>"],
+        correctAnswerIndex: 2
+    },
+    {
+        question: "Q10, Which of the following defines emphasize text?",
+        options: ["<em>","<emp>","<emphasize>","<e>"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q11, Which of the following is used to make the text underline?",
+        options: ["<under>","<u>","<line>","<underline>"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q12, <ol>, <ul> and <li> are :-",
+        options: ["Inline Element","Block Element"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q13, Which of the following is not valid input tag's type?",
+        options: ["time","date","range","calender"],
+        correctAnswerIndex: 3
+    },
+    {
+        question: "Q14, What are the attributes of meta element?",
+        options: ["name and value","name and type", "name and content","none of these"],
+        correctAnswerIndex: 2
+    },
+    {
+        question: "Q15, Can you use SVG tag directly into HTML5 without plugins?",
+        options: ["True","False","Compile depend"],
+        correctAnswerIndex: 0
+    }
+    ];
+    
+    
+const cssquiz = [
+    {
+        question:"Q1, What is the default value of position property?",
+        options:["absolute","relative","normal","static"],
+        correctAnswerIndex:3
+    },
+    {
+        question:"Q2, Which of the following property is used to change the color of text?",
+        options:["text-color","font-color","color","set-color"],
+        correctAnswerIndex:2
+    },
+    {
+        question:"Q3, CSS stands for-",
+        options:["Cascading Style Sheets","Color Style Sheets","Cascading Set Style","None of them"],
+        correctAnswerIndex:0
+    },
+    {
+        question:"Q4, How can we select an element with a specific ID in CSS?",
+        options:[".","#","@","*"],
+        correctAnswerIndex:1
+    },
+    {
+        question:"Q5, Which of the following is not valid property of css?",
+        options:["overflow","visibility","resize","hidden"],
+        correctAnswerIndex:3
+    },
+    {
+        question:"Q6, Which color is represented by #0FF?",
+        options:["Yellow","Cyan","Red","Grey"],
+        correctAnswerIndex:1
+    },
+    {
+        question:"Q7, What can be the maximum value of opacity?",
+        options:["1","0","2","100"],
+        correctAnswerIndex:0
+    },
+    {
+        question:"Q8, Which of the below is the correct syntax to put a line over text in CSS?",
+        options:["text-decoration: line","text-decoration: none","text-decoration: overline","text-decoration: underline"],
+        correctAnswerIndex:2
+    },
+    {
+        question:"Q9, Which property is used to represent the transparency of an element in CSS ?",
+        options:["hover","opacity","transparent","overlay"],
+        correctAnswerIndex:1
+    },
+    {
+        question:"Q10, How can you add space between border and inner content of the element?",
+        options:["padding","margin","border","spacing"],
+        correctAnswerIndex:0
+    },
+    {
+        question:"Q11, How to remove the underline from hyperlinks using CSS?",
+        options:["a {underline:none}","a {decoration:no underline}","a {text-decoration:no underline}","a {text-decoration:none}"],
+        correctAnswerIndex:3
+    },
+    {
+        question: "Q12, Which CSS property is used to control the boldness of the text?",
+        options: ["font-weight", "bold", "text-weight", "font-style"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q13, Which CSS property is used to control the spacing between lines of text?",
+        options: ["line-spacing", "text-line", "line-height", "spacing"],
+        correctAnswerIndex: 2
+    },
+    {
+        question: "Q14, Which property is used to add a shadow to a box?",
+        options: ["box-shadow", "shadow", "box-effect", "shadow-effect"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q15, Which CSS property is used to set the size of the text?",
+        options: ["text-size", "font-size", "size", "text-width"],
+        correctAnswerIndex: 1
+    }
+    ];
+    
+    const jsquiz = [
+    {
+        question: "Q1, What will the following code output: console.log([] + {});",
+        options: ["'object'", "'[object Object]'", "'{}'", "TypeError"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q2, What is the result of the following expression: '20' - 2?",
+        options: ["'18'", "18", "NaN", "'22'"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q3, What is the output of the following code: console.log(0.1 + 0.2 === 0.3);",
+        options: ["true", "false", "undefined", "NaN"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q4, How do you convert a string to a number in JavaScript?",
+        options: ["Number('10')", "parseInt('10')", "parseFloat('10')", "All of the above"],
+        correctAnswerIndex: 3
+    },
+    {
+        question: "Q5, Which built-in method returns the length of a string?",
+        options: ["length()", "getSize()", "size()", "None of the above"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q6, Which method is used to add new items to the end of an array?",
+        options: ["push()", "pop()", "join()", "concat()"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q7, How do you define a function in JavaScript?",
+        options: ["function myFunction()", "function:myFunction", "def myFunction()", "void myFunction()"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q8, How do you round the number 7.25, to the nearest integer?",
+        options: ["Math.round(7.25)", "round(7.25)", "Math.ceil(7.25)", "Math.floor(7.25)"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q9, How do you declare a JavaScript variable?",
+        options: ["var name;", "variable name;", "v name;", "name;"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q10, What is the output of the following code: console.log(1 + '1' - 1);",
+        options: ["'10'", "10", "11", "'11'"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q11, Which of the following is not a valid JavaScript variable name?",
+        options: ["_myVar", "myVar123", "123myVar", "my_Var"],
+        correctAnswerIndex: 2
+    },
+    {
+        question: "Q12, What is the result of the following expression: 2 + '2'?",
+        options: ["4", "22", "TypeError", "NaN"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q13, What does the JavaScript Array.indexOf() method return if the element is not found in the array?",
+        options: ["undefined", "-1", "null", "0"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q14, What will the following code output: console.log(Boolean([]));",
+        options: ["true", "false", "undefined", "TypeError"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q15, Which of the following is not a valid JavaScript data type?",
+        options: ["string", "object", "integer", "boolean"],
+        correctAnswerIndex: 2
+    }
+];
+
+
+const cppquiz = [
+    {
+        question: "Q1, Which data type is used to store decimal numbers in C++?",
+        options: ["int", "float", "char", "bool"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q2, Which of the following is a correct way to initialize an integer variable in C++?",
+        options: ["int x = 10;", "x = 10;", "integer x = 10;", "x int = 10;"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q3, What is the result of 10 % 3 - 3 * 4/2 in C++?",
+        options: ["5", "6", "-5", "0"],
+        correctAnswerIndex: 2
+    },
+    {
+        question: "Q4, Which of the following is not a C++ data type?",
+        options: ["int", "bool", "string", "real"],
+        correctAnswerIndex: 3
+    },
+    
+    {
+        question: "Q5, What is the correct syntax for commenting in C++?",
+        options: ["// This is a comment", "/* This is a comment */", "<!-- This is a comment -->", "Both // and /* */ are correct"],
+        correctAnswerIndex: 3
+    },
+    
+    {
+        question: "Q6, Which C++ keyword is used to define a class?",
+        options: ["class", "define", "struct", "int"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q7, How many parameters can a destructor have?",
+        options: ["As many as want", "0", "1", "2"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q8, Can a destructor called multiple times in a class?",
+        options: ["True","False"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q9, How do you declare a constant in C++?",
+        options: ["const x;", "constant x;", "int const x;", "const int x;"],
+        correctAnswerIndex: 3
+    },
+    {
+        question: "Q10, What is the output of the following code:cout<<1e1;",
+        options: ["100", "1", "10", "11"],
+        correctAnswerIndex: 2
+    },
+    {
+        question: "Q11, Which C++ operator is used to allocate memory for a variable?",
+        options: ["new", "malloc", "alloc", "create"],
+        correctAnswerIndex: 0
+    },
+    {
+       question: "Q12, Which keyword is needed so a function return no value?",
+       options:["int","void","bool","none of them"],
+       correctAnswerIndex:1
+    },
+    {
+        question: "Q13, Which of the following is used to terminate a C++ statement?",
+        options: [";", ",", ":", "."],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q14, How do you read user input in C++?",
+        options: ["cin>>", "scanf()", "input()", "both cin>> and scanf()"],
+        correctAnswerIndex: 3
+    },
+    {
+        question: "Q15, What is the correct syntax for declaring a function in C++?",
+        options: ["int functionName();", "function functionName();", "void functionName();", "both a and c"],
+        correctAnswerIndex: 3
+    }
+];
+
+const javaquiz = [
+    {
+        question: "Q1, Which of the following is not a primitive data type in Java?",
+        options: ["int", "double", "char", "string"],
+        correctAnswerIndex: 3
+    },
+    {
+        question: "Q2, Which keyword is used to define a class in Java?",
+        options: ["class", "define", "struct", "void"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q3, What is the output of the following code: \nSystem.out.println(10 / 3);",
+        options: ["3.33", "3", "3.0", "10"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q4, What is the result of 5 * 3 + 8 in Java?",
+        options: ["23", "15", "40", "48"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q5, Which data type is used to store true/false values in Java?",
+        options: ["bool", "int", "float", "boolean"],
+        correctAnswerIndex: 3
+    },
+    {
+        question: "Q6, In Java, '&&' is a logical:",
+        options: ["OR operator", "AND operator", "NOT operator", "XOR operator"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q7, Which statement is used to exit from a loop in Java?",
+        options: ["break", "continue", "exit", "return"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q8, What is the output of the following code: \nint x = 5;\nSystem.out.println(x++);",
+        options: ["5", "6", "Compiler error", "Undefined"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q9, Which of the following is not a valid Java keyword?",
+        options: ["interface", "implements", "extends", "inherit"],
+        correctAnswerIndex: 3
+    },
+    {
+        question: "Q10, Which keyword is used to define a constant variable in Java?",
+        options: ["const", "final", "static", "var"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q11, The 'this' keyword in Java refers to:",
+        options: ["Current class object", "Previous class object", "Next class object", "Global class object"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q12, Which method is used to read input from the user in Java?",
+        options: ["read()", "input()", "nextLine()", "console()"],
+        correctAnswerIndex: 2
+    },
+    {
+        question: "Q13, Java is a ___ programming language.",
+        options: ["Compiled", "Interpreted", "Both compiled and interpreted", "None of the above"],
+        correctAnswerIndex: 2
+    },
+    {
+        question: "Q14, Which of the following is not a valid access modifier in Java?",
+        options: ["public", "private", "protected", "global"],
+        correctAnswerIndex: 3
+    },
+    {
+        question: "Q15, In Java, '==' operator is used for:",
+        options: ["Assignment", "Comparison", "Logical AND", "Logical OR"],
+        correctAnswerIndex: 1
+    }
+];
+
+    const csharpquiz = [
+    {
+        question: "Q1, Which of the following is a valid identifier in C#?",
+        options: ["123variable", "_variable", "variable$", "class"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q2, What is the purpose of 'readonly' keyword?",
+        options: ["Declare a constant field", "Specify readonly access", "Define a non-static method", "Specify access level"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q3, What is the result of 10 % 3 * 2 in C#?",
+        options: ["0", "1", "2", "10"],
+        correctAnswerIndex: 2
+    },
+    {
+        question: "Q4, Which data type is used to store whole numbers in C#?",
+        options: ["float", "double", "decimal", "int"],
+        correctAnswerIndex: 3
+    },
+    {
+        question: "Q5, Which keyword is used to define a constant variable in C#?",
+        options: ["const", "final", "static", "var"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q6, In C#, '&&' is a logical:",
+        options: ["OR operator", "AND operator", "NOT operator", "XOR operator"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q7, Which statement is used to exit from a loop in C#?",
+        options: ["break", "continue", "exit", "return"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q8, Which access modifier limits accessibility to its own class or struct?",
+        options: ["public", "protected", "private", "internal"],
+        correctAnswerIndex: 2
+    },
+    {
+        question: "Q9, Which of the following is not a valid access modifier in C#?",
+        options: ["public", "private", "protected", "global"],
+        correctAnswerIndex: 3
+    },
+    {
+        question: "Q10, What is the keyword used to declare a class in C#?",
+        options: ["class", "define", "struct", "void"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q11, What is the purpose of 'static' keyword in C#?",
+        options: ["Create a shared member", "Declare a constant", "Define a non-static method", "Specify access level"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q12, What does the 'using' directive do in C#?",
+        options: ["Declares a new namespace", "Imports a namespace", "Declares a new class", "Imports a class"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Q13, Which operator is used to access members of a structure or class in C#?",
+        options: [".", "->", "::", "=>"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Q14, Which of the following is not a valid data type in C#?",
+        options: ["byte", "char", "short", "long long"],
+        correctAnswerIndex: 3
+    },
+    {
+        question: "Q15, What is the default value of a boolean variable in C#?",
+        options: ["true", "false", "0", "1"],
+        correctAnswerIndex: 1
+    }
+];
+
+pythonquiz = [
+    {
+        "question": "Q1, What is the correct file extension for Python files?",
+        "options": [".py", ".pyt", ".pt", ".pyth"],
+        "correctAnswerIndex": 0
+    },
+    {
+        "question": "Q2, Which keyword is used to define a function in Python?",
+        "options": ["def", "function", "define", "func"],
+        "correctAnswerIndex": 0
+    },
+    {
+        "question": "Q3, What is the result of 10 / 3 in Python?",
+        "options": ["3.33", "3", "3.0", "10"],
+        "correctAnswerIndex": 0
+    },
+    {
+        "question": "Q4, Which data type is used to store whole numbers in Python?",
+        "options": ["float", "double", "decimal", "int"],
+        "correctAnswerIndex": 3
+    },
+    {
+        "question": "Q5, Which keyword is used to declare a constant variable in Python?",
+        "options": ["const", "final", "static", "None of the above"],
+        "correctAnswerIndex": 3
+    },
+    {
+        "question": "Q6, In Python, 'and' is a logical:",
+        "options": ["OR operator", "AND operator", "NOT operator", "XOR operator"],
+        "correctAnswerIndex": 1
+    },
+    {
+        "question": "Q7, Which statement is used to exit from a loop in Python?",
+        "options": ["break", "continue", "exit", "return"],
+        "correctAnswerIndex": 0
+    },
+    {
+    "question": "Q8, Which built-in function is used to get the length of a list in Python?",
+    "options": ["len()", "length()", "size()", "count()"],
+    "correctAnswerIndex": 0
+    },
+    {
+        "question": "Q9, Which of the following is not a valid Python data type?",
+        "options": ["int", "char", "float", "str"],
+        "correctAnswerIndex": 1
+    },
+    {
+        "question": "Q10, What is the keyword used to define a class in Python?",
+        "options": ["class", "define", "struct", "void"],
+        "correctAnswerIndex": 0
+    },
+    {
+        "question": "Q11, The 'self' keyword in Python refers to:",
+        "options": ["Current class object", "Previous class object", "Next class object", "Global class object"],
+        "correctAnswerIndex": 0
+    },
+    {
+        "question": "Q12, What is the purpose of 'elif' in Python?",
+        "options": ["To specify multiple conditions", "To catch exceptions", "To define a block of code", "To declare variables"],
+        "correctAnswerIndex": 0
+    },
+    {
+        "question": "Q13, Which operator is used for exponentiation in Python?",
+        "options": ["^", "**", "*", "//"],
+        "correctAnswerIndex": 1
+    },
+    {
+        "question": "Q14, Which of the following is a valid way to comment in Python?",
+        "options": ["// Comment", "# Comment", "<!-- Comment -->", "// /* Comment */"],
+        "correctAnswerIndex": 1
+    },
+    {
+        "question": "Q15, What is the result of bool(0) in Python?",
+        "options": ["True", "False", "1", "0"],
+        "correctAnswerIndex": 1
+    }
+]
+    
+    var quiz = document.createElement("div");
+    var current = 0;
+    //var correct = htmlquiz[current].correctAnswerIndex;
+    const submit = document.createElement("button");
+    submit.setAttribute("id","submit");
+    document.body.appendChild(submit);
+    submit.textContent = "Submit";
+    submit.setAttribute("id","submit");
+    submit.style.visibility = "hidden";
+    submit.disabled = true;
+    
+    
+    
+    
+    
+    function html() {
+//navigator.vibrate(150);
+    round_no.style.visibility = "visible";
+    round.textContent = current +1;
+    lang = "HTML";
+        //current = 0;
+        home.style.visibility = "visible";
+        submit.style.visibility = "visible";
+        quiz.setAttribute("class", "quiz");
+        document.body.appendChild(quiz);
+        quiz.textContent = htmlquiz[current].question;
+        document.getElementById("lang_opt").style.display = "none";
+
+        for (let i = 0; i < htmlquiz[current].options.length; i++) {
+            var option = document.createElement("input");
+            option.setAttribute("type", "radio");
+            option.setAttribute("class", "option");
+            option.style.top = `${70 + ((i + 3) * 50)}px`;
+            document.body.appendChild(option);
+
+            var label = document.createElement("label");
+            label.setAttribute("class", "label");
+            label.style.top = `${55 + ((i + 3) * 50)}px`;
+            label.setAttribute("for", `option${i}`);
+            label.setAttribute("class","label");
+            document.body.appendChild(label);
+            label.textContent = htmlquiz[current].options[i];
+            option.setAttribute("id",`option${i}`)
+            option.setAttribute("name", `${current}`);
+            label.onclick = function () {
+                option.checked = true;
+                //check = true;
+                submit.disabled = false;
+            };
+            option.onclick = () => {
+                submit.disabled = false;
+            }
+            /*if(option.checked == true){
+                check = true;
+            }
+            option.addEventListener('change', function() {
+            if (this.checked) {
+                check = true;
+            }
+        });*/
+            if(i == htmlquiz[current].correctAnswerIndex){
+                option.classList.add("right_ans");
+            }
+        }
+    }
+    
+    function css(){
+    //navigator.vibrate(150);
+    round_no.style.visibility = "visible";
+    round.textContent = current +1;
+    lang = "CSS";
+    home.style.visibility = "visible";
+        submit.style.visibility = "visible";
+        quiz.setAttribute("class", "quiz");
+        document.body.appendChild(quiz);
+        quiz.textContent = cssquiz[current].question;
+        document.getElementById("lang_opt").style.display = "none";
+        for (let i = 0; i < cssquiz[current].options.length; i++) {
+            var option = document.createElement("input");
+            option.setAttribute("type", "radio");
+            option.setAttribute("class", "option");
+            option.style.top = `${70 + ((i + 3) * 50)}px`;
+            document.body.appendChild(option);
+
+            var label = document.createElement("label");
+            label.setAttribute("class", "label");
+            label.style.top = `${55 + ((i + 3) * 50)}px`;
+            label.setAttribute("for", `option${i}`);
+            label.setAttribute("class","label");
+            document.body.appendChild(label);
+            label.textContent = cssquiz[current].options[i];
+            option.setAttribute("id",`option${i}`)
+            option.setAttribute("name", `${current}`);
+            label.onclick = function () {
+                option.checked = true;
+                submit.disabled = false;
+            };
+            option.onclick = () => {
+                submit.disabled = false;
+            }
+            if(i == cssquiz[current].correctAnswerIndex){
+                option.classList.add("right_ans");
+            }
+        }
+    }
+    
+    function js() {
+   // navigator.vibrate(150);
+    round_no.style.visibility = "visible";
+    round.textContent = current +1;
+    lang = "Javascript";
+    home.style.visibility = "visible";
+        submit.style.visibility = "visible";
+        quiz.setAttribute("class", "quiz");
+        document.body.appendChild(quiz);
+        quiz.textContent = jsquiz[current].question;
+        document.getElementById("lang_opt").style.display = "none";
+
+        for (let i = 0; i < jsquiz[current].options.length; i++) {
+            var option = document.createElement("input");
+            option.setAttribute("type", "radio");
+            option.setAttribute("class", "option");
+            option.style.top = `${70 + ((i + 3) * 50)}px`;
+            document.body.appendChild(option);
+
+            var label = document.createElement("label");
+            label.setAttribute("class", "label");
+            label.style.top = `${55 + ((i + 3) * 50)}px`;
+            label.setAttribute("for", `option${i}`);
+            label.setAttribute("class","label");
+            document.body.appendChild(label);
+            label.textContent = jsquiz[current].options[i];
+            option.setAttribute("id",`option${i}`)
+            option.setAttribute("name", `${current}`);
+            label.onclick = function () {
+                option.checked = true;
+                submit.disabled = false;
+            };
+            option.onclick = () => {
+                submit.disabled = false;
+            }
+            if(i == jsquiz[current].correctAnswerIndex){
+                option.classList.add("right_ans");
+            }
+        }
+    }
+    
+    function cpp() {
+    //navigator.vibrate(150);
+    round_no.style.visibility = "visible";
+    round.textContent = current +1;
+    lang = "C++";
+    home.style.visibility = "visible";
+        submit.style.visibility = "visible";
+        quiz.setAttribute("class", "quiz");
+        document.body.appendChild(quiz);
+        quiz.textContent = cppquiz[current].question;
+        document.getElementById("lang_opt").style.display = "none";
+
+        for (let i = 0; i < cppquiz[current].options.length; i++) {
+            var option = document.createElement("input");
+            option.setAttribute("type", "radio");
+            option.setAttribute("class", "option");
+            option.style.top = `${70 + ((i + 3) * 50)}px`;
+            document.body.appendChild(option);
+
+            var label = document.createElement("label");
+            label.setAttribute("class", "label");
+            label.style.top = `${55 + ((i + 3) * 50)}px`;
+            label.setAttribute("for", `option${i}`);
+            label.setAttribute("class","label");
+            document.body.appendChild(label);
+            label.textContent = cppquiz[current].options[i];
+            option.setAttribute("id",`option${i}`)
+            option.setAttribute("name", `${current}`);
+            label.onclick = function () {
+                option.checked = true;
+                submit.disabled = false;
+            };
+            option.onclick = () => {
+                submit.disabled = false;
+            }
+            if(i == cppquiz[current].correctAnswerIndex){
+                option.classList.add("right_ans");
+            }
+        }
+    }
+    
+    function java() {
+   // navigator.vibrate(150);
+    round_no.style.visibility = "visible";
+    round.textContent = current +1;
+    lang = "JAVA";
+    home.style.visibility = "visible";
+        submit.style.visibility = "visible";
+        quiz.setAttribute("class", "quiz");
+        document.body.appendChild(quiz);
+        quiz.textContent = javaquiz[current].question;
+        document.getElementById("lang_opt").style.display = "none";
+
+        for (let i = 0; i < javaquiz[current].options.length; i++) {
+            var option = document.createElement("input");
+            option.setAttribute("type", "radio");
+            option.setAttribute("class", "option");
+            option.style.top = `${70 + ((i + 3) * 50)}px`;
+            document.body.appendChild(option);
+
+            var label = document.createElement("label");
+            label.setAttribute("class", "label");
+            label.style.top = `${55 + ((i + 3) * 50)}px`;
+            label.setAttribute("for", `option${i}`);
+            label.setAttribute("class","label");
+            document.body.appendChild(label);
+            label.textContent = javaquiz[current].options[i];
+            option.setAttribute("id",`option${i}`)
+            option.setAttribute("name", `${current}`);
+            label.onclick = function () {
+                option.checked = true;
+                submit.disabled = false;
+            };
+            option.onclick = () => {
+                submit.disabled = false;
+            }
+            if(i == javaquiz[current].correctAnswerIndex){
+                option.classList.add("right_ans");
+            }
+        }
+    }
+    
+    function csharp() {
+    //navigator.vibrate(150);
+    round_no.style.visibility = "visible";
+    round.textContent = current +1;
+    lang = "c#";
+    home.style.visibility = "visible";
+        submit.style.visibility = "visible";
+        quiz.setAttribute("class", "quiz");
+        document.body.appendChild(quiz);
+        quiz.textContent = csharpquiz[current].question;
+        document.getElementById("lang_opt").style.display = "none";
+
+        for (let i = 0; i < csharpquiz[current].options.length; i++) {
+            var option = document.createElement("input");
+            option.setAttribute("type", "radio");
+            option.setAttribute("class", "option");
+            option.style.top = `${70 + ((i + 3) * 50)}px`;
+            document.body.appendChild(option);
+
+            var label = document.createElement("label");
+            label.setAttribute("class", "label");
+            label.style.top = `${55 + ((i + 3) * 50)}px`;
+            label.setAttribute("for", `option${i}`);
+            label.setAttribute("class","label");
+            document.body.appendChild(label);
+            label.textContent = csharpquiz[current].options[i];
+            option.setAttribute("id",`option${i}`)
+            option.setAttribute("name", `${current}`);
+            label.onclick = function () {
+                option.checked = true;
+                submit.disabled = false;
+            };
+            option.onclick = () => {
+                submit.disabled = false;
+            }
+            if(i == csharpquiz[current].correctAnswerIndex){
+                option.classList.add("right_ans");
+            }
+        }
+    }
+    
+    function python() {
+   // navigator.vibrate(150);
+    round_no.style.visibility = "visible";
+    round.textContent = current +1;
+    lang = "Python";
+    home.style.visibility = "visible";
+        submit.style.visibility = "visible";
+        quiz.setAttribute("class", "quiz");
+        document.body.appendChild(quiz);
+        quiz.textContent = pythonquiz[current].question;
+        document.getElementById("lang_opt").style.display = "none";
+
+        for (let i = 0; i < pythonquiz[current].options.length; i++) {
+            var option = document.createElement("input");
+            option.setAttribute("type", "radio");
+            option.setAttribute("class", "option");
+            option.style.top = `${70 + ((i + 3) * 50)}px`;
+            document.body.appendChild(option);
+
+            var label = document.createElement("label");
+            label.setAttribute("class", "label");
+            label.style.top = `${55 + ((i + 3) * 50)}px`;
+            label.setAttribute("for", `option${i}`);
+            label.setAttribute("class","label");
+            document.body.appendChild(label);
+            label.textContent = pythonquiz[current].options[i];
+            option.setAttribute("id",`option${i}`)
+            option.setAttribute("name", `${current}`);
+            label.onclick = function () {
+                option.checked = true;
+                submit.disabled = false;
+            };
+            option.onclick = () => {
+                submit.disabled = false;
+            }
+            if(i == pythonquiz[current].correctAnswerIndex){
+                option.classList.add("right_ans");
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    var score = 0;
+    var subject;
+    submit.onclick = () => {
+    document.getElementById("round").textContent = current+2;
+    var l = document.querySelectorAll(".language");
+    l.forEach(function(e){
+        e.textContent = lang;
+    })
+    var right_ans = document.querySelectorAll(".right_ans");
+    
+        if(current < 14){
+        
+        right_ans.forEach(function(correct){
+            if(correct.checked){
+                score++;
+            }
+        });
+       var del_label= document.querySelectorAll(".label");
+       del_label.forEach(function(el){
+           el.remove();
+       });
+       var del_option = document.querySelectorAll(".option");
+       del_option.forEach(function(ele){
+           ele.remove();
+       })
+            current+=1;
+            subject();
+        }
+        else if(current == 14){
+        round_no.style.visibility = "hidden";
+            var right_ans = document.querySelectorAll(".right_ans");
+        right_ans.forEach(function(correct){
+            if(correct.checked){
+                score++;
+            }
+        });
+       var del_label= document.querySelectorAll(".label");
+       del_label.forEach(function(el){
+           el.remove();
+       });
+       var del_option = document.querySelectorAll(".option");
+       del_option.forEach(function(ele){
+           ele.remove();
+       });
+       submit.style.visibility = "hidden";
+       var del_quz = document.querySelectorAll(".quiz");
+       del_quz.forEach(function(element){
+           element.remove();
+       });
+       current = 0;
+       certificate.style.display = "block";
+       check_ans.style.visibility = "visible";
+       document.body.appendChild(check_ans);
+       check_ans.innerHTML = "Check Answers";
+       check_ans.onclick = function(){
+        check_answers(arr);
+        c= 0;
+        }
+        }
+        submit.disabled = true;
+        document.getElementById("score").innerHTML = score;
+        }
+        var c = 0;
+        
+    
+function check_answers(arr){
+        back.style.visibility = "visible";
+        next.style.visibility = "visible";
+        prev.style.visibility = "visible";
+certificate.style.visibility = "hidden";
+home.style.visibility = "hidden";
+    var q = document.createElement("div");
+    document.body.appendChild(q);
+    q.style.color = "#fff";
+    q.textContent = arr[c].question;
+    q.style.fontSize = "25px";
+    q.style.position ="absolute";
+    q.style.top = "100px";
+    q.style.left = "10px";
+    q.setAttribute("class","q");
+    check_ans.style.visibility = "hidden";
+    for(var i = 0; i<arr[c].options.length;i++){
+        var option = document.createElement("input");
+            option.setAttribute("type", "radio");
+            option.setAttribute("class", "option");
+            option.style.top = `${70 + ((i + 3) * 50)}px`;
+            document.body.appendChild(option);
+
+            var label = document.createElement("label");
+            label.setAttribute("class", "label");
+            label.style.top = `${55 + ((i + 3) * 50)}px`;
+            label.setAttribute("for", `option${i}`);
+            label.setAttribute("class","label");
+            document.body.appendChild(label);
+            label.textContent = arr[c].options[i];
+            option.setAttribute("id",`option${i}`);
+            option.disabled = "true";
+            if(i == arr[c].correctAnswerIndex){
+                option.checked = true;
+                label.style.backgroundColor="#595";
+            }
+    }
+}
+next.onclick = () => {
+//navigator.vibrate(200);
+if(c < 14){
+       var del_label= document.querySelectorAll(".label");
+       del_label.forEach(function(el){
+           el.remove();
+       });
+       var del_option = document.querySelectorAll(".option");
+       del_option.forEach(function(ele){
+           ele.remove();
+       });
+       var q = document.querySelectorAll(".q");
+       q.forEach(function(e){
+           e.remove();
+       })
+    c++;
+    check_answers(arr);
+    }
+}
+prev.onclick = () => {
+//navigator.vibrate(200);
+    if(c > 0){
+       var del_label= document.querySelectorAll(".label");
+       del_label.forEach(function(el){
+           el.remove();
+       });
+       var del_option = document.querySelectorAll(".option");
+       del_option.forEach(function(ele){
+           ele.remove();
+       });
+       var q = document.querySelectorAll(".q");
+       q.forEach(function(e){
+           e.remove();
+       })
+    c--;
+    check_answers(arr);
+    }
+}
+//}
+</script>
+</body>
+</html>
