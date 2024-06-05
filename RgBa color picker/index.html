@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+  <style>
+ @import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+  *{
+    font-family: 'Tilt Neon', sans-serif;
+}
+  
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #DCDCDC;
+      color: #333;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .color-picker {
+      text-align: center;
+      max-width: 300px;
+      margin: auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.5s ease;
+    }
+
+    .color-box {
+      width: 100%;
+      height: 150px;
+      border: 1px solid #ced4da;
+      margin: 20px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+    }
+
+    input[type="range"] {
+      width: 80%;
+      margin: 10px 0;
+    }
+
+    .color-preview {
+      height: 30px;
+      margin-top: 10px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+    }
+
+    .color-code {
+      margin-top: 10px;
+      font-size: 18px;
+      font-family: 'Courier New', monospace;
+      color: orange;
+    }
+
+    .copy-button {
+      margin-top: 10px;
+      cursor: pointer;
+      color: #ffffff;
+      background-color: #007bff;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    .copy-button:hover {
+      background-color: #0056b3;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #888;
+    }
+
+   
+    body.dark-mode {
+      background-color: #1e1e1e;
+      color: #fff;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .color-picker.dark-mode {
+      background-color: #333;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    .color-box.dark-mode {
+      border: 1px solid #555;
+    }
+
+    .color-preview.dark-mode {
+      border: 1px solid #555;
+    }
+
+    .color-code.dark-mode {
+      color: #ddd;
+    }
+
+    .copy-button.dark-mode {
+      background-color: #343a40;
+    }
+
+    .footer.dark-mode {
+      color: #bbb;
+    }
+
+    
+    .toggle-button {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      font-size: 20px;
+      transition: color 0.3s ease;
+    }
+
+    .toggle-button.moon {
+      display: none;
+      color: #ffd700;
+    }
+
+    .dark-mode .toggle-button.moon {
+      display: inline-block;
+    }
+
+    .toggle-button.sun {
+      display: inline-block;
+      color: #f39c12;
+    }
+
+    .dark-mode .toggle-button.sun {
+      display: none;
+    }
+  </style>
+  <title>Color Picker</title>
+</head>
+<body>
+
+<div class="toggle-button moon" onclick="toggleDarkMode()">
+  <i class="fas fa-moon"></i>
+</div>
+<div class="toggle-button sun" onclick="toggleDarkMode()">
+  <i class="fas fa-sun"></i>
+</div>
+
+<div class="color-picker" id="colorPicker">
+  <h2><i class="fas fa-paint-brush"></i> Color Picker</h2>
+  
+  <div class="color-box" id="colorBox"></div>
+  
+  <input type="range" id="redRange" max="255" value="0">
+  <input type="range" id="greenRange" max="255" value="0">
+  <input type="range" id="blueRange" max="255" value="0">
+  <input type="range" id="alphaRange" max="1" step="0.01" value="1">
+  
+  <div class="color-preview" id="colorPreview"></div>
+  
+  <div class="color-code" id="colorCode">rgba(0, 0, 0, 1)</div>
+  
+  <button class="copy-button" onclick="copyColorCode()"><i class="far fa-copy"></i> Copy Color Code</button>
+
+  <div class="footer">Made by <strong>Chandan <small>(it's me 😬)</small></strong></div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
+  <script>
+    function toggleDarkMode() {
+      const body = document.body;
+      body.classList.toggle('dark-mode');
+      const isDarkMode = body.classList.contains('dark-mode');
+      document.getElementById('colorPicker').classList.toggle('dark-mode', isDarkMode);
+      document.querySelector('.toggle-button.moon').style.display = isDarkMode ? 'none' : 'inline-block';
+      document.querySelector('.toggle-button.sun').style.display = isDarkMode ? 'inline-block' : 'none';
+    }
+
+    const colorBox = document.getElementById('colorBox');
+    const redRange = document.getElementById('redRange');
+    const greenRange = document.getElementById('greenRange');
+    const blueRange = document.getElementById('blueRange');
+    const alphaRange = document.getElementById('alphaRange');
+    const colorPreview = document.getElementById('colorPreview');
+    const colorCode = document.getElementById('colorCode');
+
+    function updateColor() {
+      const red = redRange.value;
+      const green = greenRange.value;
+      const blue = blueRange.value;
+      const alpha = alphaRange.value;
+      
+      const rgbaColor = `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+      
+      colorBox.style.backgroundColor = rgbaColor;
+      colorPreview.style.backgroundColor = rgbaColor;
+      colorCode.innerText = rgbaColor;
+    }
+
+    function copyColorCode() {
+  const rgbaColor = colorCode.innerText;
+
+  const textArea = document.createElement('textarea');
+  textArea.value = rgbaColor;
+
+  document.body.appendChild(textArea);
+  textArea.select();
+
+  try {
+    document.execCommand('copy');
+    Swal.fire({
+      title: 'Color Code Copied!',
+      text: rgbaColor,
+      icon: 'success',
+      confirmButtonColor: '#007bff',
+    });
+  } catch (error) {
+    console.error('Error copying to clipboard:', error);
+    Swal.fire({
+      title: 'Error',
+      text: 'Failed to copy color code.',
+      icon: 'error',
+      confirmButtonColor: '#007bff',
+    });
+  } finally {
+    document.body.removeChild(textArea);
+  }
+}
+
+
+    redRange.addEventListener('input', updateColor);
+    greenRange.addEventListener('input', updateColor);
+    blueRange.addEventListener('input', updateColor);
+    alphaRange.addEventListener('input', updateColor);
+
+    
+    updateColor();
+  </script>
+</div>
+
+</body>
+</html>
