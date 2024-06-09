@@ -1,0 +1,127 @@
+body {
+    margin:0;
+    padding:0;
+  background:linear-gradient(110deg,#00171f, #003652); 
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    min-height: 100vh;
+}
+
+
+.container{
+    background-color: transparent;
+    height: 6rem;
+    width: 80%;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    position:relative;
+}
+
+
+.circle{
+    border-radius: 50%;
+    background-color: #1E6091;
+    border: 1px solid white;
+    height:1rem;
+    width: 1rem;
+    position:absolute;
+    animation: blink 1s ease-in-out infinite;
+}
+
+.hidden{
+    left: -200%;
+}
+
+.hidden2{
+    left: -200%;
+}
+
+
+.circle:hover{
+    filter: blur(2px);
+    backdrop-filter: blur(10px);
+    scale: 1.2;
+    opacity: 0.5;
+}
+
+
+
+.circle:nth-child(1){
+    animation: blink 2s ease-in-out 2.5s infinite, move3 3s ease 10s forwards;
+}
+
+.circle:nth-child(2){  
+   animation: blink 2s ease-in-out 3s infinite, move2 3s linear 8s forwards;
+}
+
+.circle:nth-child(3){         
+    animation: blink 2s ease-in-out 3.5s infinite, move 3s linear 6s forwards;
+
+}
+
+
+.circle:nth-child(4){
+    left:6rem;
+    animation: blink 2s ease-in-out 2.5s infinite, move3 3s ease 10s forwards;
+}
+
+.circle:nth-child(5){ 
+    left: 8.5rem;  
+   animation: blink 2s ease-in-out 3s infinite, move2 3s linear 8s forwards;
+}
+
+.circle:nth-child(6){
+    left: 11rem;         
+    animation: blink 2s ease-in-out 3.5s infinite, move 3s linear 6s forwards;
+
+}
+
+.circle:nth-child(7){
+    animation: blink 2s ease-in-out 2.5s infinite, move3 3s ease 10s forwards;
+}
+
+.circle:nth-child(8){  
+   animation: blink 2s ease-in-out 3s infinite, move2 3s linear 8s forwards;
+}
+
+.circle:nth-child(9){        
+    animation: blink 2s ease-in-out 3.5s infinite, move 3s linear 6s forwards;
+
+}
+
+
+@keyframes blink{
+    0%{
+        opacity: 0.1;
+    }50%,80%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0.3;
+    }
+}
+
+
+/*@keyframes move{
+    to{
+        left: 200%;
+    }
+}
+
+
+@keyframes move2{
+    to{
+        right: 6rem;
+    }
+}
+
+@keyframes move3{
+    to{
+        left: 8.5rem;
+    }
+}*/
+
+
+
