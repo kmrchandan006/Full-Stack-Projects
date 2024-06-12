@@ -1,0 +1,168 @@
+ 
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+html, body{
+    width: 100%;
+    height: 100%;
+    -webkit-tap-highlight-color:transparent;   
+}
+.main{
+     width: 100%;
+     height: 100%;
+     background-color:#000000;
+     background-image:url( https://www.dropbox.com/scl/fi/e7kpzlvkey8nnyi61pn3r/920534b7a416a5d1c5b34d002f920435.jpg?rlkey=sabohvup2kzqzfydz8n61sov4&dl=1);
+     background-repeat:no-repeat ;
+     background-size:cover;
+}
+.main:hover{
+    box-shadow: 0 0 5px green, 
+                    0 0 25px lightcyan,
+                    0 0 50px purple, 0 0 100px blue;         
+}
+.stack{
+    min-height:50%;
+    width: 230px;
+    border:2px solid white;
+    border-radius: 20px ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-image: url(https://www.dropbox.com/scl/fi/dhi6tazzgafphupn0vekz/6f60dd993a4c1343cfb50dd8267de3da.jpg?rlkey=2qbafc25x86yo2t3izkajl9bc&dl=1);
+    background-size:contain;
+    background-position:center;
+    mask-image: linear-gradient(var(--direction), rgba(0,0,0,1) 40%, rgba(0,0,0,0) 60%);
+    mask-position: 50% 50%;
+    z-index: 1;
+    box-shadow: 0 0 5px lightcyan,
+                0 0 25px salmon ;
+}
+.stack:hover,
+.stack:active{
+    box-shadow: 0 0 5px green, 
+                0 0 25px lightcyan,
+                0 0 50px purple, 0 0 100px blue;
+               border:1px solid skyblue;
+               background-image:url(https://www.dropbox.com/scl/fi/qchi5yxgwarpsx26jx8ip/d27cf8230fb630ef79aaf40b2ccb8d98.jpg?rlkey=suaswisl4jrm5g3bj9hc7yt4m&dl=1);  
+              background-size:cover;
+    background-position:center; 
+                     
+}
+.profile{
+    width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.profile  img{
+    width:100px;
+    height: 100px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50px;
+    margin-top: 30%;
+    }
+ .profile img:hover{
+      box-shadow: 0 0 5px lightcyan,
+                0 0 25px salmon ;
+                border:4px double  lightcyan;
+  } 
+ .profile h3{
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    opacity: 0.78;
+}
+.profile h4{
+    font-size: 0.80rem;
+    font-weight: normal;
+    color: white;
+    opacity: 0.67;
+}
+.profile a{
+    text-decoration: none;
+    color: white;
+}
+.profile a:hover{
+    color: red;
+    cursor: pointer;
+}
+.follow{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    margin-top: 50px;
+    padding: 0 4%;
+}
+button{
+    color: white;
+    padding: 4% 6%;
+    font-size: 0.80rem;
+    text-align: center;
+    background-color: rgb(54, 122, 250);
+    cursor: pointer;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+}
+button:hover{
+    color:orange  ;
+    box-shadow: 0 0 5px lightcyan,
+                0 0 25px salmon ;
+}
+.follow i{
+    color: rgb(212, 208, 208);
+    padding: 5%;
+    background-color: transparent;
+    cursor: pointer;
+    border: 1px solid grey ;
+    border-radius: 17px;
+    font-weight: bold;
+    opacity: 0.78;    
+}
+.follow i:hover{
+    animation:tilt 5s ease-in-out ;
+}
+@keyframes tilt{
+    0%{
+        rotate:0deg;
+    }
+    30%, 70%{
+        rotate:25deg;
+    }
+    50%, 85%{
+        rotate:-25deg;
+    }
+}
+
+.socials{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    padding:24%;
+}
+.socials i{
+    color: rgb(212, 208, 208);
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: normal;
+    opacity: 0.98;
+}
+.socials i:hover,
+.follow i:hover{
+    color: orange;
+}
