@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Diyorbek Qodirboyev">
+    <meta name="description" content="Sidebar Menu Using HTML , CSS and Semantic-UI-CSS-master">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css">
+    <title>Sidebar Menu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="navigation">
+        <div class="menutoggle"></div>
+        <ul>
+            <li class="list active">
+                <a href="#" style="--clr: #f44336;">
+                    <i id="icon" class="ui home icon"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="#" style="--clr: #f1a117;">
+                    <i id="icon" class="ui user icon"></i>
+                    <span>About</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="#" style="--clr: #0fc70f;">
+                    <i id="icon" class="ui chat icon"></i>
+                    <span>Message</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="#" style="--clr: #2169f3;">
+                    <i id="icon" class="ui camera icon"></i>
+                    <span>Photos</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="#" style="--clr: #b149e9;">
+                    <i id="icon" class="ui setting icon"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="https://t.me/diyorbekqodirboyev863/41" style="--clr: #0e1538;">
+                    <i id="icon" class="ui code icon"></i>
+                    <span>Source Codes</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <script>
+        // alert('Select "Source Codes" Menu and get open codes!!!  😎');
+        let menutoggle =        document.querySelector('.menutoggle');
+        let navigation = document.querySelector('.navigation');
+        let list = document.querySelectorAll('.list');
+
+
+        menutoggle.onclick = function () {
+            navigation.classList.toggle('active');
+        }
+
+        function activeLink() {
+            list.forEach((item) => item.classList.remove('active'));
+            this.classList.add('active');
+        }
+
+        list.forEach((item) => item.addEventListener('click', activeLink));
+    </script>
+</body>
+
+</html>
