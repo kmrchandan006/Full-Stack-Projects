@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOG IN</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 20vh;
+        }
+
+        #options {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            margin-bottom: 10px;
+            min-height: 50px; /* Set a minimum height */
+        }
+
+        h3 {
+            cursor: pointer;
+            color: white;
+            background-color: #555;
+            text-align: center;
+            padding: 15px;
+            border-radius: 5px;
+            user-select: none;
+            transition: background-color 0.3s ease;
+        }
+
+        h3:hover {
+            background-color: #1f92ea;
+        }
+        h3.active {
+            background-color: #2980b9;
+        }
+
+        #options h3 {
+            margin: 0 10px;
+            flex-grow: 1; /* Allow each h3 to grow and take equal space */
+        }
+
+        #login,
+        #signup {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            margin: 20px;
+            transition: opacity 0.5s ease;
+            opacity: 1;
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        /* Responsive styles */
+        @media screen and (max-width: 600px) {
+            #login,
+            #signup {
+                width: 90%;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="options">
+        <h3 onclick="toggleForm('login')" class="active">Login</h3>
+        <h3 onclick="toggleForm('signup')">Sign Up</h3>
+    </div>
+
+    <div id="login">
+        <label for="login-username">Username: </label>
+        <input type="text" name="login-username" id="login-username">
+        <br>
+        <label for="login-password">Password: </label>
+        <input type="password" name="login-password" id="login-password">
+        <br>
+        <input type="submit" value="Login">
+    </div>
+
+    <div id="signup">
+        <label for="mail">Enter your mail: </label>
+        <input type="email" name="mail" id="mail">
+        <br>
+        <label for="signup-username">Username: </label>
+        <input type="text" name="signup-username" id="signup-username">
+        <br>
+        <label for="signup-password">Password: </label>
+        <input type="password" name="signup-password" id="signup-password">
+        <br>
+        <label for="confirm-password">Retype Password: </label>
+        <input type="password" name="confirm-password" id="confirm-password">
+        <br>
+        <input type="submit" value="Sign Up">
+    </div>
+
+    <script>
+        function toggleForm(form) {
+            const loginForm = document.getElementById("login");
+            const signupForm = document.getElementById("signup");
+            const options = document.getElementById("options");
+
+            if (form === 'login') {
+                loginForm.style.display = 'block';
+                signupForm.style.display = 'none';
+                options.querySelector('.active').classList.remove('active');
+                options.querySelector('h3:nth-child(1)').classList.add('active');
+            } else if (form === 'signup') {
+                signupForm.style.display = 'block';
+                loginForm.style.display = 'none';
+                options.querySelector('.active').classList.remove('active');
+                options.querySelector('h3:nth-child(2)').classList.add('active');
+            }
+        }
+    </script>
+</body>
+
+</html>
