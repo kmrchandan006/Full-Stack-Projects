@@ -1,0 +1,137 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+}
+body {
+ Background:url(' https://media.licdn.com/dms/image/D5603AQGQGERVny5Dug/profile-displayphoto-shrink_200_200/0/1685809761318?e=2147483647&v=beta&t=2Zpg4zrLKmDW19jzLjvFWvV6mlQNAVmfuT3EalHD4Kc') no-repeat ;
+ background-position:center;
+
+}
+.wrapper{
+    height:100vh;
+    width:100vw;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.form{
+    position:relative;
+    width:100%;
+    max-width:330px;
+    padding:80px 40px 40px;
+    background:rgba(0,0,0,0.7);
+    border-radius:5px;
+    color:#fff;
+    box-shadow:0 15px 25px rgba(0,0,0,0.8);
+}
+#forgot-pw{
+    position:absolute;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    top:0;
+    left:0;
+    right:0;
+    height:0;
+    z-index:1;
+    background:#fff;
+    opacity:0;
+    transition:0.3s;
+    
+}
+#forgot-pw:target{
+    height:100%;
+    opacity:1;
+}
+.form::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width:50%;
+    Background:rgba(225,225,225,0.08);
+    border-radius:5px;
+    pointer-events:none;
+    transform:skewX(-26px);
+    transform-origin:bottom left;
+}
+
+.form img{
+    position:absolute;
+    top:-50px;
+    left:calc(50% - 50px);
+    border-radius:50%;
+}
+.form h2{
+    text-align:center;
+    letter-spacing:1px;
+    margin-bottom:1rem;
+    color:#ff652f;
+}
+.form .input-group{
+    position:relative;
+}
+.form .input-group input{
+    Width:100%;
+    padding:10px 0;
+    font-size:1rem;
+    border:none;
+    outline:none;
+    letter-spacing:1px;
+    border-bottom:1px solid #fff;
+    margin-bottom:30px;
+    background-color:transparent;
+    color:inherit;
+}
+form .input-group label{
+    position:absolute;
+    top:0;
+    left:0;
+    padding-bottom:10px 0;
+    font-size:1rem;
+    pointer-events:none;
+    transition:.5s ease-out;
+    
+}
+.form .input-group input:focus + label,
+.form .input-group input:valid + label{
+    transform:translateY(-18px);
+    color:#ff652f;
+    font-size:0.8rem;
+}
+.submit-btn{
+    display:block ;
+    margin-left:auto ;
+    padding-top:100px;
+    border:none;
+    outline:none;
+    background:#ff652f;
+    font-size:1rem;
+    text-transform:uppercase ;
+    letter-spacing:1px;
+    padding:10px 20px;
+    border-radius:5px;
+    cursor:pointer ;
+    color:#eee;
+}
+.submit-btn:hover{
+    background:none;
+    border:1px #ff652f solid ;
+}
+
+.forgot-pw{
+    color:inherit ;
+}
+
+.close{
+    position:absolute;
+    right:1.5rem;
+    top:0.5rem;
+    font-size:2rem;
+    font-weight:900;
+    text-decoration:none ;
+    color:inherit ;
+}
+
