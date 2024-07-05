@@ -1,0 +1,94 @@
+Body{
+   
+    background: linear-gradient(90deg, 
+      rgba(255, 255, 255, 0) 0%, 
+      rgba(255, 255, 255, 0.2) 25%, 
+      rgba(255, 255, 255, 0.2) 75%, 
+      rgba(255, 255, 255, 0) 100%);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1),
+      inset 0 0 1px rgba(255, 255, 255, 0.6);
+  
+ }
+ .container {
+     Padding:10px;
+     height: 480px;
+     width:250px;
+     border: 1px solid none;
+    box-shadow: 10px 7px 12px -webkit-linear-gradient(violet,indigo,blue,green,yellow,orange,red );
+    background: #ddd;
+    position:relative ;
+    border-radius:20px;
+    margin-top:15px;
+    display:center ;
+ }
+ h1  {
+ font-style:italic;
+     Border:2px solid gray;
+     background-color:#ddd;
+     border-radius:5px;
+      display:block;
+     margin:20px auto;
+     text-align:center;
+     border: 0px solid#1267e7;
+     padding: 14px 40px;
+     width:150px;
+     outline: none;
+     color:#000000;
+     box-shadow: 8px 5px 10px gray;
+ }
+ .username{
+     font-weight:bold;
+     font-style:italic ;
+ }
+ .username_box{ 
+     Border:none;
+     background-color:skyblue;
+     display:inline-block;
+     box-shadow: 6px 5px 10px gray;
+ }
+ .password{
+     font-weight:bold;
+     font-style:italic ;
+ }
+ .password_box{ 
+     Border:none;
+     background-color:skyblue;
+     display:inline-block ;
+     box-shadow: 6px 5px 10px gray;
+ }
+ .Submit [type="submit"]{
+ font-weight:bold;
+ font-style:italic;
+     border: 0;
+     background: none;
+     display:block;
+     margin:20px auto;
+     text-align:center;
+     border:0px solid#1267e7;
+     padding: 14px 40px;
+     width:150px;
+     outline:none;
+     color:#0000FF;
+     border-radius:50px;
+     transition: 0.25s;
+     cursor: pointer;
+     box-shadow: 8px 5px 10px gray;
+ }
+ .Submit [type="submit"]:hover{
+     background: #0be064;
+ }
+ span{
+     Font-weight:bold;
+     float:right;
+ }
+ a:link {
+  font-weight:bold;
+ color:red;
+ text-decoration: none; 
+ }
+ input{
+    border:none; 
+    padding: 5px 10px 10px;
+     background:transparent ;
+     outline:none;
+ }
