@@ -1,0 +1,36 @@
+body {
+    background-color:black;
+    color:white;
+    top:0px;
+}
+
+#one{
+    background-color:olive;
+    color:white;
+    width:335px;
+    padding:10px;
+    left:0px;
+    right:0px;
+}
+
+.one{
+    
+    color:white;
+    text-decoration:none;
+    margin-left:15px;
+    
+}
+
+one:hover{
+
+        transition:2s;
+        color:lime;
+        
+}
+
+.centered-text{
+    
+    text-align:center;
+}
+
+
