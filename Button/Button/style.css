@@ -1,0 +1,44 @@
+body
+{
+  margin: 0;
+  padding: 0;
+}
+a
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 180px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-size: 24px;
+  letter-spacing: 2px;
+  color: #000;
+  text-decoration: none;
+}
+a svg,
+a svg rect
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  fill: transparent;
+}
+a svg rect
+{
+  stroke: #000;
+  stroke-width: 4;
+  transition: 1s;
+  stroke-dasharray: 180,60;
+}
+a:hover svg rect
+{
+  stroke-dasharray: 60,180;
+  stroke-dashoffset: 330;
+}
